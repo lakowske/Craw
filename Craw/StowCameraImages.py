@@ -2,6 +2,10 @@ from CameraCapture import *
 from SaveImageFrameHandler import *
 from CaptureCurrentFrameStrategy import *
 from CaptureCurrentFrameStrategyTillValid import *
+from SobelFrameHandler import *
+from LaplaceFrameHandler import *
+from BlurFrameHandler import *
+from GrayScaleFrameHandler import *
 from PathBuilder import *
 import Resources
 
@@ -16,7 +20,11 @@ captureCurrentFrameStrategyTillValid = CaptureCurrentFrameStrategyTillValid(reso
 cameraCapture = CameraCapture(captureCurrentFrameStrategyTillValid)
 pathBuilder = PathBuilder()
 saveImageFrameHandler = SaveImageFrameHandler(pathBuilder)
+sobelFrameHandler = SobelFrameHandler(saveImageFrameHandler)
+laplaceFrameHandler = LaplaceFrameHandler(saveImageFrameHandler)
+blurFrameHandler = BlurFrameHandler(laplaceFrameHandler)
+grayScaleFrameHandler = GrayScaleFrameHandler(blurFrameHandler)
 
 def capture():
-    cameraCapture.capture(saveImageFrameHandler)
+    cameraCapture.capture(grayScaleFrameHandler)
 

@@ -6,9 +6,9 @@ class CameraCapture:
     the camera capture context object to a frame handler"""
     def __init__(self, captureStrategy):
         self.captureStrategy = captureStrategy
+        self.captureObject = cv.CaptureFromCAM(0)
 
     def capture(self, frameHandler):
-        self.captureObject = cv.CaptureFromCAM(0)
         frame = self.captureStrategy.captureFrame(self.captureObject)
         frameHandler.handleFrame(frame)
-        del(self.captureObject)
+
